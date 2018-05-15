@@ -30,6 +30,17 @@ const mutation = new GraphQLObjectType({
         req.logout();
         return user;
       }
+    },
+    login: {
+      type: UserType,
+      args: {
+        email: { type: GraphQLString },
+        password: { type: GraphQLString },
+      }, 
+      resolve(parentValue, {email,password}, req) {
+        // we have to save a ref to the user because we won't get access to it after we logout.
+        return AuthService.login({email, password, req})
+      }
     }
   }
 })
