@@ -11,10 +11,7 @@ class AuthForm extends React.Component {
     
     onSubmit(event) {
         event.preventDefault();
-
-        const { email, password } = this.state;
-
-        this.props.onSubmit(email, password);
+        this.props.onSubmit(this.state);
     }
 
 
@@ -36,6 +33,9 @@ class AuthForm extends React.Component {
                                 value={this.state.password}
                                 onChange={e => this.setState({password:e.target.value})}
                             />
+                        </div>
+                        <div className="errors">
+                            {this.props.errors.map(error => <div key={error}>{error}</div>)}
                         </div>
                         <button className="btn">Submit</button>
                     </form>
